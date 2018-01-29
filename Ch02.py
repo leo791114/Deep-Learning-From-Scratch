@@ -57,3 +57,16 @@ def OR(x1_or, x2_or):
 
 
 print(OR(0, 0), OR(1, 0), OR(0, 1), OR(1, 1))
+
+#%%
+#Perception - XOR
+
+
+def XOR(x1_xor, x2_xor):
+    s1 = OR(x1_xor, x2_xor)
+    s2 = NAND(x1_xor, x2_xor)
+    y = AND(s1, s2)
+    return y
+
+
+print(XOR(0, 0), XOR(1, 0), XOR(0, 1), XOR(1, 1))
