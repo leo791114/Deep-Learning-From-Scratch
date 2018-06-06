@@ -2,3 +2,5 @@
 .DS_Store
 *.pkl
 *.gz
+__pycache__
+*.pyc

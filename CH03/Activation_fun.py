@@ -27,6 +27,7 @@ def sigmoid_function(x):
 
 
 x_sigmoid = np.arange(-5, 5, 0.02)
+print(x_sigmoid.size)
 print(type(x_sigmoid))
 y_sigmoid = sigmoid_function(x_sigmoid)
 plt.plot(x_sigmoid, y_sigmoid)

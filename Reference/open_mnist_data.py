@@ -21,24 +21,40 @@ print(os.path.abspath(os.getcwd()))
 # Download Mnist
 url_base = "http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz"
 url_base_label = "http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz"
+
+#%%
 # it has to be a file name
 file_path = os.path.abspath(os.getcwd()) + '/' + 'train-images-idx3-ubyte.gz'
 file_path_label = os.path.abspath(
     os.getcwd()) + '/' + 'train-labels-idx1-ubyte.gz'
-urllib.request.urlretrieve(url_base, file_path)
-urllib.request.urlretrieve(url_base_label, file_path_label)
+
+
+def _download(file, url_path):
+    if os.path.exists(file):
+        print(file + " already exist")
+        return
+    urllib.request.urlretrieve(url_path, file)
+
+
+_download(file_path, url_base)
+_download(file_path_label, url_base_label)
+
+# urllib.request.urlretrieve(url_base, file_path)
+# urllib.request.urlretrieve(url_base_label, file_path_label)
 
 #%%
 # Open zip file 'file_path'
 with gzip.open(file_path, 'rb') as f1:
     img_data = np.frombuffer(f1.read(),  dtype='uint8', offset=16)
     img_data = img_data.reshape(-1, img_size)
+    print(img_data.shape)
     print('Done')
 
 #%%
 print(file_path_label)
 with gzip.open(file_path_label, 'rb') as f2:
     label_data = np.frombuffer(f2.read(), dtype='uint8', offset=8)
+    print(label_data.shape)
     print("Done")
 
 
@@ -75,7 +91,8 @@ _create_pickle(img_data)
 
 
 #%%
-print(img_data[0:2, ].astype(np.float32)/255.0)
+print(img_data[0:1, ].astype(np.float32)/255.0)
+print(img_data[0:1, ].size)
 print(img_data.size)
 #rows: 60000 ; columns: 784
 print(img_data.shape)
@@ -87,12 +104,12 @@ test_img = img_data
 test_img = test_img.reshape(-1, 1, 28, 28)
 print(img_data.shape)
 print(test_img.shape)
-print(test_img[:1, ])
+print(test_img[:2, ])
 
 #%%
 print(label_data.shape)
 print(label_data.size)
-# print(label_data)
+print(label_data)
 
 #%%
 # One_hot_label

@@ -76,10 +76,11 @@ def _download(file_name):
 def _load_img(file_name):
     file_path = dataset_dir + '/' + file_name
 
-    print("Converting" + file_name + "to Numpy array")
+    print("Converting " + file_name + " to Numpy array")
     with gzip.open(file_path, 'rb') as f:
         img_data = np.frombuffer(f.read(), np.uint8, offset=16)
     img_data = img_data.reshape(-1, img_size)
+    print(img_data.shape)
     print("Done")
 
     return img_data
@@ -91,9 +92,10 @@ def _load_img(file_name):
 def _load_label(file_name):
     file_path = dataset_dir + '/' + file_name
 
-    print("Converting" + file_name + "to Numpy array")
+    print("Converting " + file_name + " to Numpy array")
     with gzip.open(file_path, 'rb') as f:
         label_data = np.frombuffer(f.read(), np.uint8, offset=8)
+    print("Done!")
 
     return label_data
 
@@ -141,11 +143,11 @@ def load_mnist(normalize=True, flatten=True, one_hot_label=False):
         dataset['train_label'] = _change_one_hot_label(dataset['train_label'])
         dataset['test_label'] = _change_one_hot_label(dataset['test_labe'])
 
-    if flatten:
+    if not flatten:
         for key in ('train_img', 'test_img'):
             dataset[key] = dataset[key].reshape(-1, 1, 28, 28)
 
-    return (dataset['train_img'], dataset['train_label'], dataset['test_img'], dataset['test_label'])
+    return ((dataset['train_img'], dataset['train_label']), (dataset['test_img'], dataset['test_label']))
 
 
 #%%
