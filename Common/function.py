@@ -59,7 +59,8 @@ def softmax(x):
 
 
 def cross_entropy_error(y_output, y_label):
-      # If there is only one data, change the output from column vector to row vector
+      # If there is only one data, change the output from row vector to column vector
+      #ex: [[1,2,3,4]]
     if y_output.ndim == 1:
         y_output = y_output.reshape(1, y_output.size)
         y_label = y_label.reshape(1, y_label.size)
@@ -69,4 +70,5 @@ def cross_entropy_error(y_output, y_label):
 
     batch_size = y_output.shape[0]
     # Small delta is used to avoid situation like np.log(0) which will return negative infinite.
+    # y_output[np.arange(batch_size), y_label] can deal with label representation
     return -np.sum(np.log(y_output[np.arange(batch_size), y_label] + 1e-7)) / batch_size

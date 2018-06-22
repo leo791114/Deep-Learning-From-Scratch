@@ -51,6 +51,7 @@ Define a General Numerical Gradient Function
 def numerical_gradient(f, x):
     h = 10  # 0.001
     grad = np.zeros_like(x)
+    # print(grad)
     it = np.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
 
     while not it.finished:
@@ -58,12 +59,15 @@ def numerical_gradient(f, x):
         tmp_val = x[idx]
         x[idx] = float(tmp_val) + h
         fxh1 = f(x)  # f(x+h)
+        # print(fxh1)
 
         x[idx] = float(tmp_val) - h
-        fxh2 = f(x[idx])  # f(x-h)
+        fxh2 = f(x)  # f(x-h)
+        # print(fxh2)
         grad[idx] = (fxh1 - fxh2) / (2*h)
+        # print(grad)
 
         x[idx] = tmp_val  # return x to original value
-        it.iternet()
+        it.iternext()
 
     return grad
