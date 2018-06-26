@@ -24,6 +24,14 @@ def sigmoid(x):
     return 1/(1+np.exp(-x))
 
 #%%
+# The derivative of sigmoid function
+
+
+def sigmoid_grad(x):
+    return (1.0 - sigmoid(x)) * sigmoid(x)
+
+
+#%%
 # ReLU Function
 
 
@@ -61,6 +69,7 @@ def softmax(x):
 def cross_entropy_error(y_output, y_label):
       # If there is only one data, change the output from row vector to column vector
       #ex: [[1,2,3,4]]
+      # y_label is label data instead of one-hot-label
     if y_output.ndim == 1:
         y_output = y_output.reshape(1, y_output.size)
         y_label = y_label.reshape(1, y_label.size)
