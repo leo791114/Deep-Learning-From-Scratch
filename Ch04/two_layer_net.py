@@ -76,7 +76,7 @@ class TwoLayerNet:
         y = softmax(a2)
 
         # backward
-        dy = (y-t) / batch_num
+        dy = (y-y_label) / batch_num
         grads['W2'] = np.dot(z1.T, dy)
         grads['b2'] = np.sum(dy, axis=0)
 
