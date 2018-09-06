@@ -18,6 +18,7 @@ class simpleNet:
         self.W = np.random.randn(2, 3)  # intialize the weight to 2*3 array
 
     def predict(self, x):
+        # print(self.W)
         return np.dot(x, self.W)
 
     def loss(self, x, y_label):
@@ -42,9 +43,12 @@ print(y_predict)
 
 print(net.loss(x, y_label))
 
+
 #%%
 '''
-Run Gradient Descent
+Run Gradient Descent:
+Every run by the numerical_gradient function would change the value of W which 
+would affect the output of net.loss(x, y_label)
 '''
 
 
@@ -52,4 +56,4 @@ def f(w): return net.loss(x, y_label)
 
 
 dw = numerical_gradient(f, net.W)
-print(dw)
+# print(dw)

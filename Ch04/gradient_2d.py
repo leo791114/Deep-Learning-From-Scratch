@@ -79,14 +79,15 @@ if __name__ == '__main__':  # tell the script is run by itself or imported as a 
 
     X = X.flatten()
     Y = Y.flatten()
+    print(np.array([X, Y]))
 
     grad = numerical_gradient(function_2, np.array([X, Y]))
 
     plt.figure()
     # , headwidth=10, scale=40, color='#444444')
-    plt.quiver(X, Y, grad[0], grad[1], angles='xy', color='#666666')
-    plt.xlim([-2, 2])
-    plt.ylim([-2, 2])
+    plt.quiver(X, Y, -grad[0], -grad[1], angles='xy', color='#666666')
+    plt.xlim([-3, 3])
+    plt.ylim([-3, 3])
     plt.xlabel('x0')
     plt.ylabel('x1')
     plt.grid()

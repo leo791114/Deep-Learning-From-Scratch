@@ -49,7 +49,7 @@ Define a General Numerical Gradient Function
 
 
 def numerical_gradient(f, x):
-    h = 10  # 0.001
+    h = 1e-4  # 0.001
     grad = np.zeros_like(x)
     # print(grad)
     it = np.nditer(x, flags=['multi_index'], op_flags=['readwrite'])
